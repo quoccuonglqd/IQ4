@@ -115,6 +115,18 @@ kubectl cluster-info
 kubectl apply -f k8s/
 ```
 
+## Start Monitoring Stack (Part D)
+tbc
+
+## Launch Airflow ETL (Part E)
+
+`I am using Postgres instead of SQLite for Airflow metadata database`
+
+```bash
+cd airflow
+docker-compose -f docker-compose.airflow.yml up -d
+```
+
 ## 📬 Contact
 
 For any issues, please contact \[[quoccuonglqd123@gmail.com](mailto:quoccuonglqd123@gmail.com)] or open a GitHub issue.
