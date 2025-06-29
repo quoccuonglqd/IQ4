@@ -1,0 +1,7 @@
+# rotate_logs.service
+[Unit]
+Description=Rotate and compress old logs
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/rotate_logs.sh
