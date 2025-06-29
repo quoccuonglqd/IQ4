@@ -127,6 +127,34 @@ cd airflow
 docker-compose -f docker-compose.airflow.yml up -d
 ```
 
+## Linux Ops Challenge
+Copy the `rotate_logs.sh` script to `/usr/local/bin/`:
+
+```bash
+sudo cp ops/rotate_logs.sh /usr/local/bin/rotate_logs.sh
+sudo chmod +x /usr/local/bin/rotate_logs.sh
+```
+
+Create rotate_logs.service and rotate_logs.timer under /etc/systemd/system/:
+
+```bash
+sudo cp ops/rotate_logs.service /etc/systemd/system/rotate_logs.service
+sudo cp ops/rotate_logs.timer /etc/systemd/system/rotate_logs.timer
+```
+
+Enable and start the timer:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now rotate_logs.timer
+```
+
+You can verify it runs:
+```bash
+systemctl list-timers --all | grep rotate_logs
+journalctl -u rotate_logs.service
+```
+
 ## 📬 Contact
 
 For any issues, please contact \[[quoccuonglqd123@gmail.com](mailto:quoccuonglqd123@gmail.com)] or open a GitHub issue.

@@ -1,0 +1,10 @@
+# rotate_logs.timer
+[Unit]
+Description=Daily rotate logs
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
