@@ -1,3 +1,17 @@
+# Ignore pdf files
 *.pdf
-.venv
-__pycache__
+# Ignore file in airflow/config airflow/logs and airflow/plugins except .gitkeep
+airflow/config/*
+airflow/logs/*
+airflow/plugins/*
+# Keep .gitkeep files in airflow directories
+!airflow/config/.gitkeep
+!airflow/logs/.gitkeep
+!airflow/plugins/.gitkeep
+# Ignore Python cache files
+__pycache__/
+*.pyc
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+# Ignore virtual environment directories
+.venv/
