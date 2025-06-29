@@ -1,0 +1,36 @@
+# azure-pipelines.yml
+trigger:
+  branches:
+    include: [main]
+
+pool:
+  vmImage: 'ubuntu-latest'
+  name: 'MyPrivatePool'
+
+variables:
+  - name: ACR_NAME
+    value: 'acmeacr'
+  - name: IMAGE_NAME
+    value: 'acme-ml-api'
+
+steps:
+- script: |
+    python3 -m pip install --upgrade pip
+    pip install flake8 pytest
+  displayName: 'Install Python dependencies'
+
+- script: flake8 src/ tests/
+  displayName: 'Lint with flake8'
+
+- script: pytest --maxfail=1 --disable-warnings -q
+  displayName: 'Run unit tests'
+
+- task: Docker@2
+  displayName: Build and Push Docker Image
+  inputs:
+    command: buildAndPush
+    repository: $(ACR_NAME).azurecr.io/$(IMAGE_NAME)
+    dockerfile: Dockerfile.app
+    tags: |
+      $(Build.BuildId)
+    azureSubscription: $(DOCKER_REGISTRY_SERVICE_CONNECTION)
