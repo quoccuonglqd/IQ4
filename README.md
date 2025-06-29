@@ -92,6 +92,29 @@ Runs all parts in order.
 * `IMAGE_NAME`: Docker image name, e.g., `acme-ml-api`
 * `DOCKER_REGISTRY_SERVICE_CONNECTION`: Service connection for ACR access defined above
 
+## Training Workflow Container (Part B)
+
+```bash
+docker build -f Dockerfile.train -t acme-ml-trainer:latest .
+docker run --rm -v "$(pwd)":/app acme-ml-trainer:latest
+```
+
+## Deploying FastAPI App (Part C)
+
+```bash
+kind create cluster --name acme-mlops
+```
+
+Verify the cluster is running:
+
+```bash
+kubectl cluster-info
+```
+
+```bash
+kubectl apply -f k8s/
+```
+
 ## 📬 Contact
 
 For any issues, please contact \[[quoccuonglqd123@gmail.com](mailto:quoccuonglqd123@gmail.com)] or open a GitHub issue.
